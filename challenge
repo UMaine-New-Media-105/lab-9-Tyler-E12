@@ -1,0 +1,65 @@
+let stars = [];
+
+function setup() {
+  createCanvas(400, 400);
+  
+  for (let i = 0; i < 50; i++) {
+    let x = random(width);
+    let y = random(height);
+    let color = random(360);
+    stars.push(new Star(x, y, color));
+  }
+}
+
+function draw() {
+  background("black");
+
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].move();
+    stars[i].show();
+  }
+}
+
+class Star {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = "orange";
+    this.addX = random(-10, 10);
+    this.addY = random(-10, 10);
+  }
+
+  move() {
+    this.x += this.addX;
+    this.y += this.addY;
+
+    if (this.x <= 0 || this.x >= width*2) {
+      this.addX = -this.addX;
+    }
+
+    if (this.y <= 0 || this.y >= height*2) {
+      this.addY = -this.addY;
+    }
+  }
+
+  show() {
+    push();
+    fill(this.color);
+    noStroke();
+    scale(.5)
+    strokeWeight(4);
+    beginShape();
+    vertex(this.x - 30, this.y - 30);
+    vertex(this.x, this.y - 100);
+    vertex(this.x + 30, this.y - 30);
+    vertex(this.x + 100, this.y);
+    vertex(this.x + 30, this.y + 30);
+    vertex(this.x, this.y + 100);
+    vertex(this.x - 30, this.y + 30);
+    vertex(this.x - 100, this.y);
+    vertex(this.x - 30, this.y - 30);
+    endShape();
+    pop();
+  }
+}
+
