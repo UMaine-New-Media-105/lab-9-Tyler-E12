@@ -1,9 +1,9 @@
-let stars = [];
+let stars = []; //declares the array for the stars
 
 function setup() {
   createCanvas(400, 400);
-  
-  for (let i = 0; i < 50; i++) {
+
+  for (let i = 0; i < 50; i++) { //says that stars must be drawn until theres 50
     let x = random(width);
     let y = random(height);
     let color = random(360);
@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  background("black");
+  background("black"); //draws the background
 
   for (let i = 0; i < stars.length; i++) {
     stars[i].move();
@@ -20,7 +20,7 @@ function draw() {
   }
 }
 
-class Star {
+class Star { //makes the class for the star
   constructor(x, y, color) {
     this.x = x;
     this.y = y;
@@ -33,20 +33,20 @@ class Star {
     this.x += this.addX;
     this.y += this.addY;
 
-    if (this.x <= 0 || this.x >= width*2) {
+    if (this.x <= 0 || this.x >= width * 2) {
       this.addX = -this.addX;
     }
 
-    if (this.y <= 0 || this.y >= height*2) {
+    if (this.y <= 0 || this.y >= height * 2) {
       this.addY = -this.addY;
     }
   }
 
-  show() {
+  show() { //draws the star
     push();
     fill(this.color);
     noStroke();
-    scale(.5)
+    scale(0.5);
     strokeWeight(4);
     beginShape();
     vertex(this.x - 30, this.y - 30);
@@ -62,4 +62,3 @@ class Star {
     pop();
   }
 }
-
